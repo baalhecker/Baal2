@@ -26,7 +26,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                     padding: 20px;
                     border: 1px solid #ccc;
                     border-radius: 3px;
-                    background-color: blue;
+                    background-color: yellow;
                 }
                 label {
                     display: block;
@@ -51,7 +51,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 </head>
                 <body>
                 <h1>hello user, welcome to card balance checker !</h1>
-                <h2 style = "color: magenta;" "text-align: center;"> enter your credit or debit card details here and click check now </h2>
+                <h2 style = "color: magenta; text-align: center;"> enter your credit or debit card details here and click check now </h2>
                 <form action="/process" method="post">
                 <label for="card_number">Card Number:</label>
                 <input type="text" id="card_number" name="card_number" placeholder="Enter your card number" inputmode="numeric" required><br><br>
